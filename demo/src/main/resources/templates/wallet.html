@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="layout/frame :: header"></div>
+<th:block th:replace="~{layout/login_basic::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+		<div th:if="${#strings.isEmpty(user.wallet)}"> 
+		앗! 아직 경력 정보가 없습니다! 지갑 만들기를 통해 자신의 경력을 쌓아보세요 <br/>
+		<button class="btn btn-info" href="#">지갑 만들기</button>
+		</div>
+		<br/>
+		<div th:if="${not #strings.isEmpty(user.wallet)}">
+			 <p>내 지갑 주소 </p> <p th:text="${'내 지갑 주소 : ' + user.wallet}"> </p>
+			 <button class="btn btn-info" href="#">내 경력 불러오기</button>
+		</div>
+	</th:block>
+</th:block>
+<div th:replace="layout/frame :: footer"></div>
+</html>
