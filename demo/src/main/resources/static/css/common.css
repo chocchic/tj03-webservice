@@ -3,18 +3,18 @@
 @font-face {
 	font-family:"NanumGothic"; 
 	src:url(../font/NanumGothic.eot); /*IE9 호환성 보기*/
-	src:local("NanumGothic"), /* 사용자 컴퓨터에 폰트가 있는지 찾기 */
-	url(../font/NanumGothic.eot?#iefix) format('embedded-opentype'), /*IE 6-8*/
-	url(../font/NanumGothic.woff) format('woff'); /*표준 브라우저*/
+	src:local("NanumGothic"); /* 사용자 컴퓨터에 폰트가 있는지 찾기 */
+/*	url(../font/NanumGothic.eot?#iefix) format('embedded-opentype'),*/ /*IE 6-8*/
+/*	url(../font/NanumGothic.woff) format('woff'); *//*표준 브라우저*/
 	font-style:normal; 
 	font-weight:normal
 }
 @font-face {
 	font-family:"NanumGothic"; 
 	src:url(../font/NanumGothicBold.eot); 
-	src:local("NanumGothicBold"), 
-	url(../font/NanumGothicBold.eot?#iefix) format('embedded-opentype'), 
-	url(../font/NanumGothicBold.woff) format('woff'); 
+	src:local("NanumGothicBold");
+/*	url(../font/NanumGothicBold.eot?#iefix) format('embedded-opentype'), */
+/*	url(../font/NanumGothicBold.woff) format('woff'); */
 	font-style: normal; 
 	font-weight:bold;
 }

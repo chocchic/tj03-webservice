@@ -13,11 +13,13 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/jquery-ui.css}" rel="stylesheet" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script th:src="@{/js/scripts.js}"></script>
-    <script th:src="@{/js/jquery-ui.js}"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -30,7 +32,9 @@
 			<h1><a href="/"><img src="/assets/sys_logo.jpg" width="200px" alt="Bteam"></a></h1>
 			<!-- util -->
 			<div class="util">
-				<a href="/login">로그인</a>
+				<p th:if="${not #strings.isEmpty(user)}" th:value="${user.id}"></p>님 안녕하세요.
+				<a th:if="${not #strings.isEmpty(user)}" href="/logout">로그아웃</a>
+				<a th:if="${#strings.isEmpty(user)}" href="/login">로그인</a>
 				<a href="/qna">문의사항</a>
 				<a href="/notice">공지사항</a>
 			</div>
@@ -39,7 +43,7 @@
 			<div id="gnb">
 				<ul>
 					<li class="">
-						<a href="/carrer/" class="dep01" style="color: rgb(40, 97, 142);">경력확인</a>
+						<a href="/career/wallet" class="dep01" style="color: rgb(40, 97, 142);">경력확인</a>
 					</li>
 					<li class="first"><a href="/gif/gif01" class="dep01">제도안내</a>
 						<ul style="display: none;">
@@ -58,7 +62,6 @@
 					<li class=""><a href="/bbs/not_list" class="dep01">소식·알림</a>
 						<ul style="display: none;">
 							<li><a href="/bbs/not_list">공지사항</a></li>
-							<li><a href="/bbs/dwn_list">자료실</a></li>
 						</ul>
 					</li>
 					<li class=""><a href="/cos/hlp_list.jsp?largeCategory=1" class="dep01">고객센터</a>
@@ -81,20 +84,19 @@
 <div class="footer">
 	<!-- 버튼영역 -->
 	<div class="footer_btn">
-		<a href="/" target="_blank">한국소프트웨어산업협회 안내</a>
-		<a href="/join/jif01.jhtml">이용약관</a>
-		<a href="/join/jif02.jhtml">개인정보처리방침</a>
-		<a href="/join/jif04.jhtml">찾아오시는 길</a>
-		<a href="/join/jif05.jhtml">사이트맵</a>
+		<a href="/" target="_blank">CABB 안내</a>
+		<a href="/join/jif01.html">이용약관</a>
+		<a href="/join/jif02.html">개인정보처리방침</a>
+		<a href="/join/jif04.html">찾아오시는 길</a>
+		<a href="/join/jif05.html">사이트맵</a>
 	</div>
 	<!-- 공단로고 -->
-	<p><img src="/images/common/footer_logo_org.gif" alt="소프트웨어산업협회"></p>
+	<p><img src="/images/common/footer_logo_org.png" alt="CABB"></p>
 	<!-- 정보 -->
 	<span>
-		한국소프트웨어산업협회<br>
-		서류제출처 : (05717) 서울시 송파구 중대로 135, 서관 12층(가락동) 한국소프트웨어산업협회 SW기술자 경력확인 담당자 앞<br>
-		대표전화 : 02-2188-6980 / FAX : 0502-777-6967<br>
-		Copyrightⓒ2015 한국소프트웨어산업협회. ALL RIGHTS RESERVED.
+		CABB<br>
+		서류제출처 : (04058) 서울특별시 마포구 노고산동 57-1 CABB SW기술자 경력확인 담당자 앞<br>
+		대표전화 : 02-0000-0000 / FAX : 0000-000-0000<br>
 	</span>
 </div>
 </th:block>

@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import java.util.Collections;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +15,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
-import com.example.demo.persistence.MemberRepo;
+import com.example.demo.persistence.CareerRepo;
+import com.example.demo.persistence.UserRepository;
 import com.example.demo.security.dto.OAuthAttributes;
 import com.example.demo.security.dto.SessionUser;
 
@@ -23,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
-	private final MemberRepo userRepository;
+	private final UserRepository userRepository;
 	private final HttpSession httpSession;
 	
 	@Override
@@ -50,8 +52,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 	}
 	
 	private User saveOrUpdate(OAuthAttributes attributes) {
-		User user = userRepository.findById(attributes.getEmail()).map(entity-> entity.update(attributes.getWallet())).orElse(attributes.toEntity());
+		Optional<User> user = userRepository.findById(attributes.getEmail());
+		if (user.get().getWallet() == null){ // 정보가 담겨있으면 더이상 수정 X
+			user.map(entity-> entity.update(attributes.getWallet())).orElse(attributes.toEntity());
+		}
 
-		return userRepository.save(user);
+		return userRepository.save(user.get());
 	}
 }
