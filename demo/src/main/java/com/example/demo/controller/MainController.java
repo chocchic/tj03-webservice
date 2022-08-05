@@ -18,9 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.CareerDTO;
 import com.example.demo.dto.PageRequestDTO;
+import com.example.demo.model.WalletResponse;
 import com.example.demo.security.dto.SessionUser;
 import com.example.demo.service.CareerService;
 import com.example.demo.service.UserService;
+import com.example.demo.service.WalletService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +33,7 @@ public class MainController {
 	private final HttpSession httpSession;
     private final CareerService careerService;
     private final UserService userS;
+    private final WalletService walletS;
     
 	// 메인 홈
 	@GetMapping("/")
@@ -58,8 +61,11 @@ public class MainController {
 	
 	@PostMapping("/career/wallet")
 	public String createwallet(String alias, Model model, RedirectAttributes rAttr) {
+		WalletResponse response = walletS.initWallet(alias);
 		// 백엔드로부터 받은 pk보여주기
 		//userS.registerWallet(String alias, String wallet);
+		
+		model.addAttribute("pk", response.getPrivateKey());
 		return "wallet";
 	}
 	
