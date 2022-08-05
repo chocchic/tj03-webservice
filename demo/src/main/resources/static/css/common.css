@@ -114,7 +114,7 @@ a:hover, a:focus, a:active {color:#fa8300; text-decoration:none}
 
 /* header */
 .header {position:relative; min-width:1200px; height:111px; background:url(../images/common/header_bg.gif) repeat-x}
-.header h1 {position:absolute; width:210px; top:39px; left:50%; margin-left:-600px; height:70px; overflow:hidden; text-indent:-10000px; background:url(../images/common/sys_logo.gif) no-repeat; z-index:10}
+.header h1 {position:absolute; width:210px; top:39px; left:50%; margin-left:-600px; height:70px; overflow:hidden; text-indent:-10000px; background:url(../images/common/sys_logo.jpg) no-repeat; z-index:10}
 .header h1 a {display:block}
 
 .util {position:absolute; top:3px; right:50%; margin-right:-600px; height:35px; font-size:0; z-index:10}
@@ -156,7 +156,7 @@ a:hover, a:focus, a:active {color:#fa8300; text-decoration:none}
 .footer_btn {position:absolute; top:0; left:50%; margin-left:-600px; width:1200px; height:59px; font-size:0; z-index:10}
 .footer_btn a {display:inline-block; width:239px; border-right:1px solid #404040; height:59px; line-height:59px; font-size:14px; color:#ababab; text-align:center; *zoom:1; *display:inline; *margin-left:-1px}
 .footer_btn a:first-child {width:238px; border-left:1px solid #404040}
-.footer p {position:absolute; top:90px; left:50%; margin-left:-570px; width:172px; height:72px; overflow:hidden; text-indent:-10000px; background:url(../images/common/footer_logo_org.gif) no-repeat; z-index:10}
+.footer p {position:absolute; top:90px; left:50%; margin-left:-570px; width:172px; height:72px; overflow:hidden; text-indent:-10000px; background:url(../images/common/footer_logo_org.png) no-repeat; z-index:10}
 .footer span {position:absolute; top:86px; left:50%; margin-left:-350px; display:block; color:#868686; line-height:1.6; z-index:10}
 
 /* lnb */

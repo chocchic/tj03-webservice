@@ -20,6 +20,7 @@ import com.example.demo.dto.CareerDTO;
 import com.example.demo.dto.PageRequestDTO;
 import com.example.demo.security.dto.SessionUser;
 import com.example.demo.service.CareerService;
+import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,11 +30,12 @@ import lombok.RequiredArgsConstructor;
 public class MainController {
 	private final HttpSession httpSession;
     private final CareerService careerService;
+    private final UserService userS;
+    
 	// 메인 홈
 	@GetMapping("/")
 	public String main(Model model) {
 		SessionUser user = (SessionUser)httpSession.getAttribute("user");
-		
 		if(user!=null) {	// session에 저장된 값이 있을 때만 model에 userName으로 등록
 			model.addAttribute("user", user);
 		}
@@ -54,6 +56,13 @@ public class MainController {
 		return "wallet";
 	}
 	
+	@PostMapping("/career/wallet")
+	public String createwallet(String alias, Model model, RedirectAttributes rAttr) {
+		// 백엔드로부터 받은 pk보여주기
+		//userS.registerWallet(String alias, String wallet);
+		return "wallet";
+	}
+	
 	@GetMapping("/career/new")
 	public String newcareerPage(Model model, RedirectAttributes rAttr) {
 		SessionUser user = (SessionUser)httpSession.getAttribute("user");
@@ -66,17 +75,32 @@ public class MainController {
 		return "newcareer";
 	}
 	
-	@CrossOrigin("http://localhost:80")
 	@PostMapping("/career/new")
 	public String insertnewcareer(CareerDTO dto, RedirectAttributes rAttr) {
+		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+		if (user == null) {
+			rAttr.addAttribute("result", "사용자 정보가 없습니다.");
+			return "/";
+		}
 		if (careerService.registerCareer(dto) != null) {
-			rAttr.addAttribute("result", "결제 후 관리자가 승인할 시 경력으로 등록됩니다. \n결제를 위해 심사중인 경력 리스트로 가시겠습니까?");
-			return "redirect:/career/pending";
+			return "newcareer_confirm";
 		}
 		
-		rAttr.addAttribute("result", "경력 등록에 실패했습니다.");
 		return "redirect:/main";
 	}
+	
+	@GetMapping("/career/newconfirm")
+	public String newcareerConfirmPage(CareerDTO dto, Model model, RedirectAttributes rAttr) {
+		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+		if (user == null) {
+			rAttr.addAttribute("error", "로그인 해주세요!");
+			return "redirect:/main";
+		}
+		model.addAttribute("career", dto);
+		
+		return "newcareer_confirm";
+	}
+	
 	
 	@GetMapping("/career/pending")
 	public String pendingList(Model model, @ModelAttribute("requestDTO")PageRequestDTO pageRequestDTO) {

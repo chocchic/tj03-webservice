@@ -16,7 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script th:src="@{/js/scripts.js}"></script>
-
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -26,13 +27,13 @@
 <body>
 <div class="d-flex" id="wrapper">
     <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light"><img src="/assets/logo_size.jpg" width="200px"/></div>
+        <div class="sidebar-heading border-bottom bg-light"><img src="/images/common/logo_size.jpg" width="200px"/></div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/career/wallet">내 경력 확인</a>
+        	<a class="list-group-item list-group-item-action list-group-item-light p-3" href="/career/wallet">지갑 확인</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/career/mine">내 경력 확인</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/career/new">경력 추가</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cabb/pending">승인 대기 중 경력 확인</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/wallet">타인의 경력 확인</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/cabb/#">이메일 무단 수집 거부</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/career/pending">승인 대기 중 경력 확인</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/career/others">타인의 경력 확인</a>
         </div>
     </div>
     <!-- Page content wrapper-->

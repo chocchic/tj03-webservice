@@ -7,8 +7,7 @@ import lombok.Data;
 @Builder
 public class UserDTO {
 	private String id;
-	private String pw;
-	private String link;
 	private String wallet;
+	private String alias;
 	private String auth;
 }

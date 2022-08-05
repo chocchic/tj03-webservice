@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
-import com.example.demo.persistence.CareerRepo;
+import com.example.demo.persistence.CareerRepository;
 import com.example.demo.persistence.UserRepository;
 import com.example.demo.security.dto.OAuthAttributes;
 import com.example.demo.security.dto.SessionUser;

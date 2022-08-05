@@ -20,8 +20,10 @@ import lombok.ToString;
 public class User{
 	@Id
 	private String id;
-	private String link;
+	private String alias;
 	private String wallet;
+	
+	
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	

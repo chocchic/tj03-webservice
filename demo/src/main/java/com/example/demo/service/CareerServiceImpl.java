@@ -13,14 +13,14 @@ import com.example.demo.dto.CareerDTO;
 import com.example.demo.dto.PageRequestDTO;
 import com.example.demo.dto.PageResponseDTO;
 import com.example.demo.model.Tempcareer;
-import com.example.demo.persistence.CareerRepo;
+import com.example.demo.persistence.CareerRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class CareerServiceImpl implements CareerService{
-	private final CareerRepo careerRepo;
+	private final CareerRepository careerRepo;
 	
 	@Value("${com.choc.upload.path}")
 	private String uploadPath;
@@ -62,13 +62,11 @@ public class CareerServiceImpl implements CareerService{
 			}
 		}
 		Tempcareer result = careerRepo.save(career);
-		System.out.println("경력등록 성공 : " + result.getApplier());
 		return result.getNum();
 	}
 
 	@Override
 	public PageResponseDTO getTempCareerList(PageRequestDTO dto) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
