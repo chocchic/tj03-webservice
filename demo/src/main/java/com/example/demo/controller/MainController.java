@@ -36,7 +36,7 @@ public class MainController {
     private final WalletService walletS;
     
 	// 메인 홈
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String main(Model model) {
 		SessionUser user = (SessionUser)httpSession.getAttribute("user");
 		if(user!=null) {	// session에 저장된 값이 있을 때만 model에 userName으로 등록
@@ -56,7 +56,7 @@ public class MainController {
 			rAttr.addAttribute("error", "로그인 해주세요!");
 			return "redirect:/main";
 		}
-		return "wallet";
+		return "/career/wallet";
 	}
 	
 	@PostMapping("/career/wallet")
@@ -67,7 +67,7 @@ public class MainController {
 		userS.registerWallet(user.getId(), response.getWallet(), alias);
 		
 		model.addAttribute("pk", response.getPrivateKey());
-		return "wallet";
+		return "/career/wallet";
 	}
 	
 	@GetMapping("/career/new")
@@ -79,7 +79,7 @@ public class MainController {
 			rAttr.addAttribute("error", "로그인 해주세요!");
 			return "redirect:/main";
 		}
-		return "newcareer";
+		return "/career/newcareer";
 	}
 	
 	@PostMapping("/career/new")
@@ -110,8 +110,21 @@ public class MainController {
 	
 	
 	@GetMapping("/career/pending")
-	public String pendingList(Model model, @ModelAttribute("requestDTO")PageRequestDTO pageRequestDTO) {
+	public String pendingList(Model model, RedirectAttributes rAttr) {
+		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+		if (user == null) {
+			rAttr.addAttribute("error", "로그인 해주세요!");
+			return "redirect:/main";
+		}
+		PageRequestDTO pageRequestDTO = PageRequestDTO.builder().id(user.getId()).page(1).size(10).build();
 		model.addAttribute("result", careerService.getTempCareerList(pageRequestDTO));
-		return "pending";
+		model.addAttribute("email", user.getId());
+		return "/career/pending";
+	}
+	
+	@GetMapping("/career/mine")
+	public String myCareer(Model model) {
+		return null;
+		
 	}
 }

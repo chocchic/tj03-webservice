@@ -23,9 +23,10 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class KakaoPayServiceImpl implements KakaoPayService {
-	private RestTemplate restTemplate;
+	private final CareerRepository careerR;
+
+	private final RestTemplate restTemplate;
 	private KakaoPayReadyVO readyVO;
-	private CareerRepository crepo;
 	
 	@Override
 	public String kakaoPayReady(String email, long num) {
@@ -33,9 +34,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization","KakaoAK "+"395f6291ce611687cdf212033eb48ca5");
 		
-		Optional<Tempcareer> careers = crepo.findById(num);
+		Optional<Tempcareer> careers = careerR.findById(num);
 		if (careers.isEmpty() || !careers.get().getApplier().equals(email)) {
-			return "/";
+			return "/main";
 		}
 		Tempcareer temp = careers.get();
 		
@@ -99,7 +100,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 					.getApplier()).career_end(readyVO.getTemp().getCareer_end()).career_start(readyVO.getTemp().getCareer_start())
 					.company(readyVO.getTemp().getCompany()).job(readyVO.getTemp().getJob()).proof(readyVO.getTemp()
 							.getProof()).payment("kakao").build();
-			crepo.save(temp2);
+			careerR.save(temp2);
 			return approvalVO; // 응답으로 받은 정보 리턴
 		} catch (RestClientException e) {
 			e.printStackTrace();

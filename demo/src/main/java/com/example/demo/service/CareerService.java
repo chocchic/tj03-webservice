@@ -2,12 +2,10 @@ package com.example.demo.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 import com.example.demo.dto.CareerDTO;
 import com.example.demo.dto.PageRequestDTO;
-import com.example.demo.dto.PageResponseDTO;
 import com.example.demo.model.Tempcareer;
 
 public interface CareerService {
@@ -15,7 +13,7 @@ public interface CareerService {
 	public Long registerCareer(CareerDTO dto);
 	
 	// 현재 심사중인 경력 페이지 별로 뽑아오기
-	public PageResponseDTO getTempCareerList(PageRequestDTO dto);
+	public List<CareerDTO> getTempCareerList(PageRequestDTO dto);
 	
 	public default Tempcareer DtoToEntity(CareerDTO dto) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

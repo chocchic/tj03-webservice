@@ -11,12 +11,12 @@ import com.example.demo.pay.dto.KakaoPayApprovalVO;
 import com.example.demo.pay.service.KakaoPayService;
 
 @Controller
-@RequestMapping("pay")
+@RequestMapping("/pay")
 public class PayController {
 	@Autowired
 	private KakaoPayService service;
 	
-	@GetMapping("kakaoPay")
+	@GetMapping("/kakaoPay")
 	public String kakaoPay(String email, long num) {
 		String responseURL = service.kakaoPayReady(email, num);
 		return "redirect:" + responseURL; // 주소연결
@@ -24,7 +24,7 @@ public class PayController {
 	
 	// 준비 요청성공시 실행될 요청 메서드
 	// 파라미터로 넘어오는 pg_token 받고
-	@GetMapping("kakaoPaySuccess")
+	@GetMapping("/kakaoPaySuccess")
 	public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		KakaoPayApprovalVO orderVO = service.kakaoPayApprove(pg_token);
 		

@@ -3,15 +3,22 @@ package com.example.demo.service;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.CareerDTO;
 import com.example.demo.dto.PageRequestDTO;
-import com.example.demo.dto.PageResponseDTO;
 import com.example.demo.model.Tempcareer;
 import com.example.demo.persistence.CareerRepository;
 
@@ -20,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CareerServiceImpl implements CareerService{
-	private final CareerRepository careerRepo;
+	private final CareerRepository careerR;
 	
 	@Value("${com.choc.upload.path}")
 	private String uploadPath;
@@ -61,13 +68,25 @@ public class CareerServiceImpl implements CareerService{
 				return null;
 			}
 		}
-		Tempcareer result = careerRepo.save(career);
+		Tempcareer result = careerR.save(career);
 		return result.getNum();
 	}
 
 	@Override
-	public PageResponseDTO getTempCareerList(PageRequestDTO dto) {
-		return null;
+	public List<CareerDTO> getTempCareerList(PageRequestDTO dto) {
+		Sort sort = Sort.by("num").descending();
+		Pageable pageable = PageRequest.of(dto.getPage()-1, dto.getSize(), sort);
+		Page<Tempcareer> pages = careerR.findAll(pageable);
+		List<CareerDTO> list = new ArrayList<>();
+		for(Tempcareer obj: pages.getContent()) {
+			String parsedcs = obj.getCareer_start().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			String parsedce = obj.getCareer_end().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			CareerDTO cDTO = CareerDTO.builder().num(obj.getNum()).applier(obj.getApplier()).career_start(parsedcs)
+					.career_end(parsedce).company(obj.getCompany()).job(obj.getJob()).payment(obj.getPayment())
+					.build();
+			list.add(cDTO);
+		}
+		return list;
 	}
 
 }

@@ -21,14 +21,14 @@
 	            	</tr>
 	         	</thead>
 		        <tbody>
-		            <tr th:each="dto : ${result.list}">
-		        		<th scope="row">[[${dto.dno}]]</th>
-						<td><a th:href="@{/career/pending/(num=${dto.dno})">[[${dto.company}]]
+		            <tr th:each="dto, i : ${result}">
+		        		<th scope="row">[[${i.index+1}]]</th>
+						<td><a th:href="@{/career/pending/(num=${dto.num})}">[[${dto.company}]]
 						</a></td>
 						<td>[[${dto.job}]]</td>
-						<td>[[${#temporals.format(dto.career_start, 'yyyy/MM/dd')}]]</td>
-						<td>[[${#temporals.format(dto.career_end, 'yyyy/MM/dd')}]]</td>
-						<td th:if="${dto.payment == '0'}">결제 미완료</td>
+						<td>[[${dto.career_start}]]</td>
+						<td>[[${dto.career_end}]]</td>
+						<td th:if="${dto.payment == '0'}"><a th:href="@{/pay/kakaoPay/(email=${email}, num=${dto.num})}">결제하기</a></td>
 						<td th:if="${dto.payment != '0'}">[[${dto.payment}]]</td>
 		            </tr>
 		         </tbody>
