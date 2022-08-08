@@ -61,9 +61,10 @@ public class MainController {
 	
 	@PostMapping("/career/wallet")
 	public String createwallet(String alias, Model model, RedirectAttributes rAttr) {
+		SessionUser user = (SessionUser)httpSession.getAttribute("user");
 		WalletResponse response = walletS.initWallet(alias);
 		// 백엔드로부터 받은 pk보여주기
-		//userS.registerWallet(String alias, String wallet);
+		userS.registerWallet(user.getId(), response.getWallet(), alias);
 		
 		model.addAttribute("pk", response.getPrivateKey());
 		return "wallet";

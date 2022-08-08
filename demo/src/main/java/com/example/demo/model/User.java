@@ -27,12 +27,6 @@ public class User{
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	public User update(String wallet) {
-		this.wallet = wallet;
-		
-		return this;
-	}
-	
 	public String getRoleKey() {
 		return this.role.getKey();
 	}

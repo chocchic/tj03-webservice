@@ -22,9 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.headers().frameOptions().disable() //h2-console화면을 확인하기위해 csrf토큰 해제 & 헤더 프레임옵션해제
 			.and()
 				.authorizeRequests() // URL 별 권한 관리를 설정하는 옵션의 시작점
-				.antMatchers("/","/css/**","/images/**","/js/**","/join/**").permitAll()
-				.antMatchers("/api/v1/**","/career/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-				.antMatchers("/admin").hasRole(Role.ADMIN.name())
+				.antMatchers("/","/css/**","/images/**","/js/**","/join/**", "/career/wallet").permitAll()
+				.antMatchers("/api/v1/**","/career/new", "/career/pending", "/career/pendingcareer").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+				.antMatchers("/admin/**").hasRole(Role.ADMIN.name())
 				.anyRequest().authenticated()
 			.and()
 				.logout()

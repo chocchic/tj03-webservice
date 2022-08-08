@@ -21,8 +21,6 @@ public class OAuthAttributes {
 		this.attributes = attributes;
 		this.nameAttributeKey = nameAttributeKey;
 		this.email = email;
-		this.wallet = wallet;
-		this.alias = alias;
 	}
 	
 	public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
@@ -30,11 +28,11 @@ public class OAuthAttributes {
 	}
 	
 	public static OAuthAttributes ofGoogle(String userNameAttributeKey, Map<String, Object> attributes) {
-		return OAuthAttributes.builder().email((String)attributes.get("email")).wallet((String)attributes.get("wallet")).attributes(attributes)
-				.alias((String)attributes.get("alias")).nameAttributeKey(userNameAttributeKey).build();
+		return OAuthAttributes.builder().email((String)attributes.get("email")).attributes(attributes)
+				.nameAttributeKey(userNameAttributeKey).build();
 	}
 	
 	public User toEntity() {
-		return User.builder().id(email).alias(alias).wallet(wallet).role(Role.USER).build();
+		return User.builder().id(email).role(Role.USER).build();
 	}
 }
