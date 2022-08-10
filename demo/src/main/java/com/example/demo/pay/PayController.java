@@ -17,7 +17,7 @@ public class PayController {
 	private KakaoPayService service;
 	
 	@GetMapping("/kakaoPay")
-	public String kakaoPay(String email, long num) {
+	public String kakaoPay(@RequestParam("email")String email, @RequestParam("num")long num) {
 		String responseURL = service.kakaoPayReady(email, num);
 		return "redirect:" + responseURL; // 주소연결
 	}

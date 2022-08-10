@@ -43,6 +43,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.7.2'
 	
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+	
+	
 }
 
 tasks.named('test') {

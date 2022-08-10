@@ -37,11 +37,4 @@
 	</th:block>
 </th:block>
 <div th:replace="layout/frame :: footer"></div>
-<script>
-	var msg = [[${result}]];
-	var result = confirm(result);
-	if(! result) {
-		location.replace('http://localhost:80/');    
-	}
-</script>
 </html>

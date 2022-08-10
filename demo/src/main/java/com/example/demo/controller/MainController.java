@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.config.LoginUser;
 import com.example.demo.dto.CareerDTO;
 import com.example.demo.dto.PageRequestDTO;
 import com.example.demo.model.WalletResponse;
@@ -37,8 +38,7 @@ public class MainController {
     
 	// 메인 홈
 	@GetMapping("/main")
-	public String main(Model model) {
-		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+	public String main(Model model, @LoginUser SessionUser user) {
 		if(user!=null) {	// session에 저장된 값이 있을 때만 model에 userName으로 등록
 			model.addAttribute("user", user);
 		}
@@ -48,8 +48,7 @@ public class MainController {
 		
 	// 지갑 페이지
 	@GetMapping("/career/wallet")
-	public String walletPage(Model model, RedirectAttributes rAttr) {
-		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+	public String walletPage(Model model, RedirectAttributes rAttr, @LoginUser SessionUser user) {
 		if(user!=null) {
 			model.addAttribute("user", user);
 		}else {
@@ -60,8 +59,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/career/wallet")
-	public String createwallet(String alias, Model model, RedirectAttributes rAttr) {
-		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+	public String createwallet(String alias, Model model, RedirectAttributes rAttr, @LoginUser SessionUser user) {
 		WalletResponse response = walletS.initWallet(alias);
 		// 백엔드로부터 받은 pk보여주기
 		userS.registerWallet(user.getId(), response.getWallet(), alias);
