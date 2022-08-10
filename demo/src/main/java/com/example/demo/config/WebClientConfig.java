@@ -9,12 +9,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientConfig {
-	private final static String BASE_URL = "http://localhost:3000";
+	private static final String BASE_URL = "http://localhost:3000";
 	private static final String API_MIME_TYPE = "application/json";
 	private static final String USER_AGENT = "Spring 5 WebClient";
 	
 	@Bean
-    WebClient client(WebClient.Builder webClientBuilder) {
+    public WebClient client(WebClient.Builder webClientBuilder) {
         return webClientBuilder
                 .baseUrl(BASE_URL)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, API_MIME_TYPE)
@@ -23,7 +23,7 @@ public class WebClientConfig {
     }
 
     @Bean
-    RestTemplate restTemplate() {
+    public RestTemplate restTemplate() {
     	RestTemplate rest = new RestTemplate();
     	rest.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         return rest;

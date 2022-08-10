@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class WalletService {
-	private WebClient client;
+	private final WebClient client;
 	
     public WalletResponse initWallet(String alias) {
         Mono<WalletResponse> walletmono = client.post().uri("/MakeWallet").bodyValue("{\"Alias\""+alias+"}")

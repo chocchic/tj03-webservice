@@ -28,9 +28,7 @@ public class WalletRestController {
 		}
 		return ResponseEntity.ok().body(result);
 	}
-	
-	
-	
+		
 	// 관리자가 승인시, 사용자 세션 정보에서 지갑 주소 받아올 것
 	
 }
