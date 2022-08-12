@@ -23,9 +23,8 @@
 		        <tbody>
 		            <tr th:each="dto, i : ${result}">
 		        		<th scope="row">[[${i.index+1}]]</th>
-						<td><a th:href="@{/career/pending/(num=${dto.num})}">[[${dto.company}]]
-						</a></td>
-						<td>[[${dto.job}]]</td>
+						<td><a th:href="@{/career/pendingcareer/(num=${dto.num})}">[[${dto.company}]]</a></td>
+						<td><a th:href="@{/career/pendingcareer/(num=${dto.num})}">[[${dto.job}]]</a></td>
 						<td>[[${dto.career_start}]]</td>
 						<td>[[${dto.career_end}]]</td>
 						<td th:if="${dto.payment == '0'}"><a th:href="@{/pay/kakaoPay/(email=${email}, num=${dto.num})}">결제하기</a></td>

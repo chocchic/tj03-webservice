@@ -16,4 +16,5 @@ public class CareerDTO {
 	private String job;
 	private MultipartFile proof;
 	private String payment;
+	private String proof_name;
 }

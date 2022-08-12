@@ -25,7 +25,7 @@ public class PayController {
 	// 준비 요청성공시 실행될 요청 메서드
 	// 파라미터로 넘어오는 pg_token 받고
 	@GetMapping("/kakaoPaySuccess")
-	public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
+	public void kakaoPaySuccess(@RequestParam("pg_token")String pg_token, Model model) {
 		KakaoPayApprovalVO orderVO = service.kakaoPayApprove(pg_token);
 		
 		model.addAttribute("num",orderVO.getPartner_order_id());

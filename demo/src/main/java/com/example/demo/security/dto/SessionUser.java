@@ -19,6 +19,5 @@ public class SessionUser implements Serializable{
 		this.id = user.getId();
 		this.alias = user.getAlias();
 		this.wallet = user.getWallet();
-				
 	}
 }

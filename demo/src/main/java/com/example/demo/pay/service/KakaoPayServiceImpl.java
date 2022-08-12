@@ -37,7 +37,6 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	public String kakaoPayReady(String email, long num) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization","KakaoAK " + ADMIN_KEY);
-
 		headers.add("Accept",MediaType.APPLICATION_JSON_VALUE); 	// 크롬 정책에 따라 무조건 utf-8 형태가 되어, 그 전처럼 사용하면 deprecated
 		headers.add("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8");
 		Optional<Tempcareer> careers = careerR.findById(num);
@@ -63,6 +62,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		try {
 			readyVO = restTemplate.postForObject(new URI("https://kapi.kakao.com/v1/payment/ready"), body, KakaoPayReadyVO.class);
 			readyVO.setTemp(temp);
+			System.out.println("ready : " + readyVO);
 			return readyVO.getNext_redirect_pc_url();
 		} catch (RestClientException e) {
 			System.out.println("restexcep" + e.getLocalizedMessage());
@@ -80,10 +80,12 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	public KakaoPayApprovalVO kakaoPayApprove(String pg_token) {
 		// 헤더 정보
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization","KakaoAK" + ADMIN_KEY);
+		headers.add("Authorization","KakaoAK " + ADMIN_KEY);
 		headers.add("Accept",MediaType.APPLICATION_JSON_VALUE);
 		headers.add("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8");
 		
+		System.out.println("도달 : " + readyVO);
+				
 		// 바디 파라미터
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
@@ -106,6 +108,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			careerR.save(temp2);
 			return approvalVO; // 응답으로 받은 정보 리턴
 		} catch (RestClientException e) {
+			System.out.println("execption : " + e.getLocalizedMessage() + " : " + body );
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();

@@ -16,10 +16,7 @@ public class PageRequestDTO {
 	private int page;
 	//한 페이지에 보여질 데이터 개수
 	private int size;
-	
-	// 자신의 아이디 미리 받아둠
-	private String id;
-	
+		
 	//생성자
 	public PageRequestDTO() {
 		page = 1;

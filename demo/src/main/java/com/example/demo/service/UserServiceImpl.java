@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
-import com.example.demo.model.WalletResponse;
 import com.example.demo.persistence.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		if(user.isPresent()) {
 			temp = user.get();
 			User saveU = User.builder().alias(alias).id(temp.getId()).role(temp.getRole())
-				.wallet(temp.getWallet()).build();
+				.wallet(wallet).build();
 			userR.save(saveU);
 		}
 		

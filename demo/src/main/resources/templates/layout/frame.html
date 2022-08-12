@@ -32,18 +32,18 @@
 			<h1><a href="/"><img src="/images/common/sys_logo.jpg" width="200px" alt="CABB"></a></h1>
 			<!-- util -->
 			<div class="util">
-				<p th:if="${not #strings.isEmpty(user)}" th:value="${user.id}"></p>님 안녕하세요.
 				<a th:if="${not #strings.isEmpty(user)}" href="/logout">로그아웃</a>
 				<a th:if="${#strings.isEmpty(user)}" href="/login">로그인</a>
 				<a href="/qna">문의사항</a>
 				<a href="/notice">공지사항</a>
+				<a th:if="${not #strings.isEmpty(user)}" href="/admin/pending">관리자 페이지로</a>
 			</div>
 			<!--// util -->
 			<!-- GNB -->
 			<div id="gnb">
 				<ul>
 					<li class="">
-						<a href="/career/wallet" class="dep01" style="color: rgb(40, 97, 142);">경력확인</a>
+						<a href="/career/other" class="dep01" style="color: rgb(40, 97, 142);">경력확인</a>
 					</li>
 					<li class="first"><a href="/gif/gif01" class="dep01">제도안내</a>
 						<ul style="display: none;">

@@ -6,6 +6,11 @@
 	<th:block th:fragment="content">
 		<div class="container">
 		 	<h1 class="mt-4">미승인 경력 세부 확인</h1>
+			<form th:action="@{/admin/pendingcareer}" th:method="post">
+			    <div class="form-group">
+			    	<label>사용자명</label>
+				    <input type="text" class="form-control" name="applier" th:value="${dto.applier}" readonly>
+			    </div>
 			    <div class="form-group">
 			      <label>발주처, 근무처</label>
 			      <input type="text" class="form-control" name="company" th:value="${dto.company}" readonly>
@@ -20,13 +25,28 @@
 			    </div>
 			    <div class="form-group">
 			      <label>직종, 업무</label>
-			      <input type="text" class="form-control" name="job" th:value="${dto.job}">
+			      <input type="text" class="form-control" name="job" th:value="${dto.job}" readonly>
 			    </div>
 			    <div class="form-group proof-div">
 			    	<h3>증명서</h3>
-				   		<a th:href="@{/users/} + ${dto.proof_name}">저장된 증명서 명 : [[${dto.proof_name}]]</a>
+				   	<a th:href="@{/users/} + ${dto.proof_name}">저장된 증명서 명 : [[${dto.proof_name}]]</a>
 			    </div>
-		</div>
+			    <input type="hidden" name="proof_name" th:value="${dto.proof_name}">
+
+			    <button type="submit" class="btn btn-warn">승인하기</button>
+		    </form>
+	    </div>
+	    <script>
+
+	$(document).ready(function(){
+	
+		var result=/*[[${msg}]]*/;
+		if(result != null){
+			alert(result);
+		}
+		
+	});
+</script>
 	</th:block>
 </th:block>
 <div th:replace="layout/frame :: footer"></div>

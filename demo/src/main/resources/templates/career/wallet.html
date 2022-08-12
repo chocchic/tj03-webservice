@@ -11,7 +11,7 @@
 				<input class="form-control" name="alias" placeholder="50자 이내의 자신만의 지갑이름을 지어보세요!" required>
 				<p>약관을 읽어보시고 서명에 동의하시면 동의란에 체크해주세요</p>
 				<h6>약관</h6>
-				<div style="overflow:scroll; width:350px; height:200px;">
+				<div style="overflow:scroll; width:600px; height:200px;">
 					곳으로 실현에 어디 이것이야말로 그들의 낙원을 있는가? 듣기만 대고, 인간에 보이는 간에 같이, 사라지지 장식하는 이것이다. 긴지라 것은 힘차게 바이며, 것이다. 
 					천지는 품고 생의 청춘의 듣는다. 노년에게서 구하지 풍부하게 풀이 밥을 있을 아니한 그들에게 미묘한 것이다. 이 싹이 기관과 아름답고 것이다.보라, 방황하여도, 듣기만 사는가 말이다. 
 					지혜는 스며들어 주는 오아이스도 타오르고 뿐이다. 물방아 그들의 행복스럽고 그들의 것이다. 거친 것은 찾아 속에서 청춘을 있다.
@@ -50,71 +50,37 @@
 					위하여서, 꽃이 열락의 끓는 심장의 아니한 구하지 쓸쓸하랴? 있는 하는 황금시대의 가장 목숨이 이것이다.
 				</div>
 				<div class="form-check">
-			      	<label>비동의</label>
-			      	<input class="form-check-input" type="radio" value="agree" checked="checked">
 			      	<label>동의</label>
-			      	<input class="form-check-input" type="radio" value="disagree">
+			      	<input class="form-radio" type="radio" name="AAA" value="agree" checked="checked">
+			      	<label>비동의</label>
+			      	<input class="form-radio" type="radio" name="AAA" value="disagree">
+			      	<button type="button" class="btn btn-info" id="create">지갑 만들기</button>
 			      </div>
-				<button type="button" class="btn btn-info" id="create">지갑 만들기</button>
 			</form>
 			</div>
 			<div th:if="${not #strings.isEmpty(user.wallet)}">
 				<h5 th:text="${'내 지갑( '+ user.alias +' ) 주소 : ' + user.wallet}"> </h5>
 			</div>
-			<br/><br/>
-			<h3>타인의 지갑 주소 이메일로 검색하기</h3>
-			<div class="input-group">
-				<input class="form-control" id="keyIn" name="keyword">
-            	<div class="input-group-append" id="button-addon4">
-               		<button class="btn btn-outline-secondary btn-search" id ="Search" type="button">Search</button>
-               		<button class="btn btn-outline-secondary btn-clear" type="button">Clear</button>
-            	</div>
-			</div>
-			<div class="result_div">
-				<p id="wallet_result"></p>
-			</div>
 		</div>
 	</th:block>
 </th:block>
 <script>
+
 	$(document).ready(function(){
-		$('#Search').click(()=>{
-			var email=$("#keyIn").val();
-			console.log("ajax : "+ email);
-			$.ajax({
-			    url: "/find", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
-			    data: {"email" : email},  // HTTP 요청과 함께 서버로 보낼 데이터
-			    method: "GET",   // HTTP 요청 메소드(GET, POST 등)
-			    dataType: "json" // 서버에서 보내줄 데이터의 타입
-			})
-			// HTTP 요청이 성공하면 요청한 데이터가 done() 메소드로 전달됨.
-			.done(function(json) {
-				if(json.wallet == "없는 email입니다."){
-					$("#wallet_result").text(json.wallet).appendTo("#result_div");
-				}else{
-			    	$("#wallet_result").text(email+"님의 지갑 주소 : "+json.wallet).appendTo("#result_div");
-				}
-			})
-			// HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() 메소드로 전달됨.
-			.fail(function(xhr, status, errorThrown) {
-				$("#wallet_result").text("찾을 수 없는 사람입니다. 오타를 확인해주세요.").appendTo("#result_div");
-			});
-		});
-		
-		var searchForm = $("#searchForm");
-		$('.btn-clear').click(function(e){
-			$("#wallet_result").text("").appendTo("#result_div");
-		});
-		
 		var Form = $("#wcForm");
 		$('#create').click(function(e){
-			if($("input[name='testInput']:checked").val() == "disagree"){
+			if($("input[name='AAA']:checked").val() == "disagree"){
 				alert("서명 동의가 필요합니다. 약관을 확인하시고 동의버튼을 눌러주세요");
 			}else{
 				Form.submit();
 			}
 		});
-
+	
+	//	var result=/*[[${msg}]]*/;
+	//	if(result != null){
+	//		alert("Private Key 생성! "+result);
+	//	}
+	
 	});
 </script>
 <div th:replace="layout/frame :: footer"></div>
